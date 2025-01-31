@@ -1398,7 +1398,7 @@ int cmd_clone(int argc,
 
 	if (option_rev) {
 		option_tags = 0;
-		option_branch = 0;
+		option_branch = NULL;
 		option_single_branch = 0;
 		opts.wants_head = 0;
 		opts.detach = 1;
