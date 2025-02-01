@@ -723,6 +723,7 @@ integration_tests = [
   't5618-alternate-refs.sh',
   't5619-clone-local-ambiguous-transport.sh',
   't5620-backfill.sh',
+  't5621-clone-revision.sh',
   't5700-protocol-v1.sh',
   't5701-git-serve.sh',
   't5702-protocol-v2.sh',

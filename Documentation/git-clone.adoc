@@ -13,7 +13,7 @@ git clone [--template=<template-directory>]
 	  [-l] [-s] [--no-hardlinks] [-q] [-n] [--bare] [--mirror]
 	  [-o <name>] [-b <name>] [-u <upload-pack>] [--reference <repository>]
 	  [--dissociate] [--separate-git-dir <git-dir>]
-	  [--depth <depth>] [--[no-]single-branch] [--no-tags]
+	  [--depth <depth>] [--[no-]single-branch] [--[no-]-tags]
 	  [--recurse-submodules[=<pathspec>]] [--[no-]shallow-submodules]
 	  [--[no-]remote-submodules] [--jobs <n>] [--sparse] [--[no-]reject-shallow]
 	  [--filter=<filter-spec>] [--also-filter-submodules]] [--] <repository>
@@ -221,6 +221,16 @@ objects from the source repository into a pack in the cloned repository.
 	`--branch` can also take tags and detaches the `HEAD` at that commit
 	in the resulting repository.
 
+`--revision` _<rev>_::
+	Create a new repository, and fetch the history leading to the given
+	revision _<rev>_ (and nothing else), without making any remote-tracking
+	branch, and without making any local branch, and point `HEAD` to
+	_<rev>_. When creating a non-bare repository, the revision is checked
+	out on a detached `HEAD`. The argument can be a ref name
+	(e.g. `refs/heads/main` or `refs/tags/v1.0`) that peels down to a
+	commit, or a hexadecimal object name.
+	This option is incompatible with `--branch` and `--mirror`.
+
 `-u` _<upload-pack>_::
 `--upload-pack` _<upload-pack>_::
 	When given, and the repository to clone from is accessed
@@ -273,8 +283,9 @@ corresponding `--mirror` and `--no-tags` options instead.
 	branch when `--single-branch` clone was made, no remote-tracking
 	branch is created.
 
-`--no-tags`::
-	Don't clone any tags, and set
+`--[no-]tags`::
+	By default tags are cloned, and passing `--tags` doesn't change that.
+	With `--no-tags`, no tags are cloned, and set
 	`remote.<remote>.tagOpt=--no-tags` in the config, ensuring
 	that future `git pull` and `git fetch` operations won't follow
 	any tags. Subsequent explicit tag fetches will still work,
